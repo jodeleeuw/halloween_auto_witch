@@ -1,7 +1,8 @@
-#define RED_LED_PIN 10
+#define RED_LED_PIN 11
 #define GREEN_LED_PIN 9
-#define BLUE_LED_PIN 8
+#define BLUE_LED_PIN 10
 
+int light_mode = 0;
 
 void setup() {
   pinMode(RED_LED_PIN, OUTPUT);
@@ -10,16 +11,20 @@ void setup() {
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
-  int r = 0;
-  for(r = 0; r < 255; r++){
-    setColor(r, 0,0);
-    delay(10);
+
+  int pulse = 0;
+
+  if(light_mode == 0){
+    for(pulse = 20; pulse < 120; pulse += 1){
+      setColor(0, pulse, 0);
+      delay(20);
+    }
+    for(pulse = 120; pulse > 20; pulse -= 1){
+      setColor(0, pulse, 0);
+      delay(20);
+    }
   }
-  for(r = 255; r > 0; r--){
-    setColor(r, 0,0);
-    delay(10);
-  }
+
 }
 
 void setColor(int r, int g, int b){
